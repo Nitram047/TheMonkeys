@@ -6,11 +6,7 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #f4f4f4;
-  margin: 0;
-}
+
 
 .app {
   display: flex;
@@ -28,9 +24,3 @@ main {
   padding: 2rem;
 }
 
-/* Contenedor que centra y limita el ancho */
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;  /* Esto centra horizontalmente */
-}
