@@ -52,7 +52,7 @@
 }
 
 .logo img {
-  height: 70px;
+  height: 110px;
   filter: drop-shadow(3px 3px 0px #000);
   transition: all 0.2s ease;
 }
