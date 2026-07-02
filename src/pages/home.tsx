@@ -19,9 +19,14 @@ const Home = () => {
       </div> 
     </section>
 
-    <section className='hero2'>
-
+    <section className='hero-footer'>
+      <div className='div-section'>
+        <div className='div-icon'> <i class="fa-solid fa-robot"></i> </div>
+        <h1>¿Esto es interesante no?</h1>
+      </div>
     </section>
+
+
     </main>
     
     

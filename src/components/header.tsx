@@ -1,7 +1,7 @@
 
 import React from "react";
 import "./../css/Header.css";
-import logo from '../assets/Logo retro _The Monkeys_ en azul y turquesa.png';
+import logo from '../assets/Logo_retro _The Monkeys_ en azul y turquesa.png';
 import { Link } from "react-router-dom";
 
 const Header = () => {

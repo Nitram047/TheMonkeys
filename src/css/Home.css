@@ -4,6 +4,12 @@
   background-color: #5df1e5;
 }*/
 
+main {
+  display: flex;
+  flex-direction: column; /* ← esto apila las sections */
+  gap: 2rem; /* espacio entre secciones */
+}
+
 
 body {
   background-color: #5df1e5;
@@ -41,7 +47,6 @@ body {
   filter: drop-shadow(10px 10px 0px #000);
 }
 
-
 .hero-h1{
   font-family:'Kanit', sans-serif;
   font-weight: 500;
@@ -49,4 +54,22 @@ body {
   font:fantasy;
   text-align: left;
   align-self: flex-start;
+}
+
+/* SECTION footer*/
+.hero-footer{
+
+}
+
+.div-section{
+  text-align: center;
+}
+
+
+.div-icon{
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  font-size:3rem;
 }

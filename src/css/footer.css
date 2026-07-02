@@ -1,0 +1,29 @@
+footer{
+    width: 100%;
+}
+
+.top-footer{
+    padding: 70px 50px;
+    background-color: #5df1e5;
+    /*background:linear-gradient(to bottom, #5df1e5,100px, #2c3e50);*/
+    /*background:linear-gradient(to bottom ,#5df1e5,20%, #ffffff);*/
+}
+
+.bottom-bar{
+    border-top: 1px solid #2c3e50;
+}
+
+.marca-slide{
+    height: 110px;
+    /*filter: drop-shadow(3px 3px 0px #000);*/
+    transition: all 0.2s ease;
+}
+
+.marca-slide img{
+    max-width: 130px;
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(100%); /*hace que los logos se vean grises */
+    opacity: 1;
+    transition: all 0.3s ease;
+}
