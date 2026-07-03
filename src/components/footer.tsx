@@ -24,13 +24,40 @@ const Footer = () => {
     <footer className="footer-container">
       {/* SECCIÓN SUPERIOR: Contenido e información */}
       <div className='top-footer'>
-        <div className="footer-info">
-          <p>&copy; {new Date().getFullYear()} Mi Aplicación React. Todos los derechos reservados.</p>
-          <p>Hecho por The Monkeys Web</p>
+        <div className="footer-grid">
+          
+          {/* Columna 1: Branding */}
+          <div className="footer-col text-left">
+            <h3 className="footer-brand">The Monkeys <span>Web</span></h3>
+            <p className="footer-description">
+              Donde todos los custom son posibles.
+            </p>
+          </div>
+
+          {/* Columna 2: Navegación */}
+          <div className="footer-col">
+            <h4>Navegación</h4>
+            <ul className="footer-links">
+              <li><a href="#home">Inicio</a></li>
+              <li><a href="#servicios">Galeria</a></li>
+              <li><a href="#blog">Blog</a></li>
+              <li><a href="#contacto">Contacto</a></li>
+            </ul>
+          </div>
+
+          {/* Columna 3: Contacto o Tech Stack */}
+          <div className="footer-col">
+            <h4>Contacto</h4>
+            <p>📍 Guanajuato, México</p>
+            <p>✉️ info@themonkeysweb.com</p>
+            <div className="footer-socials">
+              {/* Aquí irían iconos de redes */}
+              <a href="#insta">Instagram</a>
+              <a href="#github">GitHub</a>
+            </div>
+          </div>
+
         </div>
-        
-
-
       </div>
 
       <hr className="footer-divider" />
