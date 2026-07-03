@@ -6,15 +6,19 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import logoMarcaA from '../assets/Logo_retro_TheMonkeys-sinfondo.png';
 import logoMarcaB from '../assets/Logo_retro_garage-sinfondo.png';
+import logoMarcaC from '../assets/Logo_TheMonkeys_2_sinfondo.png';
+import logoMarcaD from '../assets/The Monkeys_code.png';
+import logoMarcaE from '../assets/tecnologia-nano.png';
+import logoMarcaF from '../assets/react.svg';
 
 const Footer = () => {
   const marcas = [
     { id: 1, name: 'Marca A', logo: logoMarcaA },
     { id: 2, name: 'Marca B', logo: logoMarcaB },
-    { id: 3, name: 'Marca C', logo: 'https://via.placeholder.com/150x50?text=Marca+C' },
-    { id: 4, name: 'Marca D', logo: 'https://via.placeholder.com/150x50?text=Marca+D' },
-    { id: 5, name: 'Marca E', logo: 'https://via.placeholder.com/150x50?text=Marca+E' },
-    { id: 6, name: 'Marca F', logo: 'https://via.placeholder.com/150x50?text=Marca+F' },
+    { id: 3, name: 'Marca C', logo: logoMarcaC },
+    { id: 4, name: 'Marca D', logo: logoMarcaD },
+    { id: 5, name: 'Marca E', logo: logoMarcaE },
+    { id: 6, name: 'Marca F', logo: logoMarcaF },
   ];
   return (
     <footer className="footer-container">
