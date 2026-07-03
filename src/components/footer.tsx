@@ -28,6 +28,9 @@ const Footer = () => {
           <p>&copy; {new Date().getFullYear()} Mi Aplicación React. Todos los derechos reservados.</p>
           <p>Hecho por The Monkeys Web</p>
         </div>
+        
+
+
       </div>
 
       <hr className="footer-divider" />
@@ -55,8 +58,9 @@ const Footer = () => {
               <img src={marca.logo} alt={marca.name} title={marca.name} />
             </SwiperSlide>
           ))}
-        </Swiper>
-      </div>
+          </Swiper>
+        </div>
+      
     </footer>
   )
 };

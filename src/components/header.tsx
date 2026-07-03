@@ -27,10 +27,10 @@ const Header = () => {
       {/* Nivel inferior */}
       <div className="bottom-bar">
         <nav className="main-nav">
-          <a href="#">Categoría 1</a>
-          <a href="#">Categoría 2</a>
-          <a href="#">Categoría 3</a>
-          <a href="#">Categoría 4</a>
+          <a href="#">Decals</a>
+          <a href="#">Customs</a>
+          <a href="#">Llantas de goma</a>
+          <a href="#">Otros</a>
         </nav>
       </div>
     </header>

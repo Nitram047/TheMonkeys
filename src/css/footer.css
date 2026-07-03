@@ -1,29 +1,61 @@
-footer{
+/* Contenedor general del footer */
+.footer-container {
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
-.top-footer{
+.top-footer {
     padding: 70px 50px;
     background-color: #5df1e5;
-    /*background:linear-gradient(to bottom, #5df1e5,100px, #2c3e50);*/
-    /*background:linear-gradient(to bottom ,#5df1e5,20%, #ffffff);*/
 }
 
-.bottom-bar{
+.footer-divider {
+    border: 0;
     border-top: 1px solid #2c3e50;
+    margin: 0; /* Eliminamos márgenes para que no se desfase */
 }
 
-.marca-slide{
-    height: 110px;
-    /*filter: drop-shadow(3px 3px 0px #000);*/
-    transition: all 0.2s ease;
+/* 1. CARRUSEL A TODO LO LARGO (100% de la pantalla) */
+.bottom-footer-carousel {
+    width: 100%;
+    background-color: #5df1e5; /* <--- O el color que quieras para tapar el fondo general */
+    padding: 20px 0;          /* Espaciado interno arriba y abajo */
+    box-sizing: border-box;
 }
 
-.marca-slide img{
-    max-width: 130px;
+/* 2. ELIMINAR PUNTOS NEGROS EXTRAÑOS */
+.marcas-swiper, 
+.marcas-swiper .swiper-wrapper {
+    list-style: none !important; /* Quita viñetas si Swiper se está renderizando como lista */
+    padding: 0 !important;       /* Quita paddings fantasmas */
+    margin: 0 !important;
+}
+
+/* 3. CONTROLAR EL TAMAÑO DE LOS SLIDES (Más compactos) */
+.marca-slide {
+    height: 60px; /* <--- Bajamos la altura de 110px a 60px para que sea más sutil */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+    background: transparent; /* Asegura que no pinte nada raro detrás */
+}
+
+/* 4. REDUCIR EL TAMAÑO DE LOS LOGOS */
+.marca-slide img {
+    max-height: 75%;    /* No permite que el logo sea más alto que los 60px del slide */
+    max-width: 100px;    /* Bajamos el ancho máximo de 130px a 100px */
+    width: auto;
     height: auto;
     object-fit: contain;
-    filter: grayscale(100%); /*hace que los logos se vean grises */
-    opacity: 1;
+    filter: grayscale(100%); 
+    opacity: 0.8;        /* Un toque más sutil, sube a 1 si lo prefieres brillante */
     transition: all 0.3s ease;
+}
+
+/* Efecto hover opcional */
+.marca-slide img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
 }
