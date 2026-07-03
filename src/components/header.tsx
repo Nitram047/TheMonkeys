@@ -11,7 +11,7 @@ const Header = () => {
       <div className="top-bar">
         <nav className="nav-left">
             <Link to='/'>Inicio</Link>
-            <Link to='/dashboard'>Dashboard</Link>
+            <Link to='/dashboard'>Galeria</Link>
         </nav>
 
         <div className="logo">
