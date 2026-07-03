@@ -6,8 +6,9 @@
 }
 
 .top-footer {
-    padding: 70px 50px;
-    background-color: #5df1e5;
+    padding: 30px 50px;
+    /*background-color: #5df1e5;*/
+    background-color:#2c3e50;
 }
 
 .footer-divider {
@@ -19,7 +20,7 @@
 /* 1. CARRUSEL A TODO LO LARGO (100% de la pantalla) */
 .bottom-footer-carousel {
     width: 100%;
-    background-color: #5df1e5; /* <--- O el color que quieras para tapar el fondo general */
+    background-color: #2c3e50; /* <--- O el color que quieras para tapar el fondo general */
     padding: 20px 0;          /* Espaciado interno arriba y abajo */
     box-sizing: border-box;
 }
@@ -58,4 +59,74 @@
 .marca-slide img:hover {
     filter: grayscale(0%);
     opacity: 1;
+}
+
+
+
+/*Footer section columns*/
+/* Añadimos un Grid para organizar las columnas */
+.footer-grid {
+    display: flex;
+    grid-template-columns: column;
+    gap: 250px;
+    /*margin-bottom: 10px;*/
+}
+
+/* Cuando la pantalla sea de tablet/PC, se divide en 3 */
+@media (min-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 2fr 1fr 1fr; /* La col del logo es más ancha */
+    }
+}
+
+.footer-col h4 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #ffffff;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-brand {
+    font-size: 1.8rem;
+    color: #ffffff;
+    margin-top: 0;
+}
+
+.footer-brand span {
+    font-weight: 300;
+}
+
+.footer-description {
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: #11a9e0; /* Contraste blanco al pasar el mouse sobre el fondo turquesa */
+}
+
+.footer-copy {
+    text-align: center;
+    border-top: 1px solid rgba(44, 62, 80, 0.1);
+    padding-top: 20px;
+    color: #ffffff;
+    font-size: 0.9rem;
 }
