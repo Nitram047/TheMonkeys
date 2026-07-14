@@ -3,6 +3,8 @@ import React from 'react';
 import '../css/Home.css';
 import logo_2 from '../assets/Logo_TheMonkeys_2_sinfondo.png';
 
+import Features from '../components/home/features';
+
 const Home = () => {
   return (
     <main>
@@ -25,7 +27,8 @@ const Home = () => {
         <h1>¿Esto es interesante no?</h1>
       </div>
     </section>
-
+    
+    <Features></Features>
 
     </main>
     
