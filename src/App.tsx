@@ -2,7 +2,7 @@
 import React from 'react';
 import Layout from './components/common/layout';
 import BlogList from './pages/blogList';
-import Dashboard from './pages/dashboard';
+import Dashboard from './pages/gallery';
 
 import Home from './pages/home';
 import './App.css';
