@@ -10,8 +10,8 @@ const Header = () => {
       {/* Nivel superior */}
       <div className="top-bar">
         <nav className="nav-left">
-            <Link to='/'>Inicio</Link>
-            <Link to='/dashboard'>Galeria</Link>
+            <Link to='/'>Home</Link>{/*Los nombres en gris no influyen*/}
+            <Link to='/gallery'>Gallery</Link>
         </nav>
 
         <div className="logo">
@@ -19,8 +19,8 @@ const Header = () => {
         </div>
 
         <nav className="nav-right">
-          <a href="#">Blog</a>
-          <a href="#">Contacto</a>
+          <Link to='/'>Blog</Link>
+          <Link to='/dashboard'>Dashboard</Link>
         </nav>
       </div>
 

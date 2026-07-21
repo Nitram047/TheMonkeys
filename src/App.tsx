@@ -2,28 +2,30 @@
 import React from 'react';
 import Layout from './components/common/layout';
 import BlogList from './pages/blogList';
-import Dashboard from './pages/gallery';
 
-import Home from './pages/home';
 import './App.css';
 
 import {
   BrowserRouter, Routes, Route, Link
 } from "react-router-dom";
 
+import Gallery from './pages/gallery';
+import Dashboard from './pages/dashboard';
+import Home from './pages/home';
+
 
 function App() {
   return (
     <BrowserRouter>
-    <Layout>
       <Routes>
-        {/* Ruta a home*/}
-        <Route path='/' element={<Home/>}/>
-
-        {/*Ruta a otras */}
-        <Route path='/dashboard' element={<Dashboard/>}/>
+        {/* Estas rutas SÍ usan el Layout público */}
+        <Route path="/" element={<Layout><Home /></Layout>} />
+        <Route path="/gallery" element={<Layout><Gallery /></Layout>} />
+        <Route path="/blog" element={<Layout><BlogList /></Layout>} />
+        
+        {/* Dashboard NO usa el Layout público, tiene su propio layout */}
+        <Route path="/dashboard/*" element={<Dashboard />} />
       </Routes>
-    </Layout>
     </BrowserRouter>
     
   );
