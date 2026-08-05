@@ -1,33 +1,36 @@
 // src/App.tsx
 import React from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from './components/common/layout';
-import BlogList from './pages/blogList';
-
-import './App.css';
-
-import {
-  BrowserRouter, Routes, Route, Link
-} from "react-router-dom";
-
-import Gallery from './pages/gallery';
-import Dashboard from './pages/dashboard';
 import Home from './pages/home';
-
+import Gallery from './pages/gallery';
+import BlogList from './pages/blogList';
+import Dashboard from './pages/dashboard';
+import Login from './pages/login';
+import ProtectedRoute from './components/common/ProtectedRoute';
+import './App.css';
+import './index.css';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Estas rutas SÍ usan el Layout público */}
+        {/* Rutas públicas */}
         <Route path="/" element={<Layout><Home /></Layout>} />
         <Route path="/gallery" element={<Layout><Gallery /></Layout>} />
         <Route path="/blog" element={<Layout><BlogList /></Layout>} />
+        <Route path="/login" element={<Login />} />
         
-        {/* Dashboard NO usa el Layout público, tiene su propio layout */}
-        <Route path="/dashboard/*" element={<Dashboard />} />
+        {/* Rutas protegidas */}
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        } />
+        
+        <Route path="*" element={<Layout><h1>404</h1></Layout>} />
       </Routes>
     </BrowserRouter>
-    
   );
 }
 

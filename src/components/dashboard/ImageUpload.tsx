@@ -1,9 +1,11 @@
+// src/components/dashboard/ImageUpload.tsx (CON SOPORTE PARA ARCHIVOS)
 import React, { useState, useRef } from 'react';
 import { Upload, X } from 'lucide-react';
+import { Image } from '../../types';
 
 interface ImageUploadProps {
   initialData?: Partial<Image>;
-  onSave: (data: any) => void;
+  onSave: (data: any, file?: File) => void;
   onCancel: () => void;
 }
 
@@ -17,11 +19,15 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   const [category, setCategory] = useState(initialData?.category || '');
   const [imageUrl, setImageUrl] = useState(initialData?.url || '');
   const [preview, setPreview] = useState(initialData?.url || '');
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isUploading, setIsUploading] = useState(false);
 
+  // 🔹 Manejar selección de archivo
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      setSelectedFile(file);
       const reader = new FileReader();
       reader.onloadend = () => {
         const url = reader.result as string;
@@ -32,62 +38,85 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // 🔹 Enviar formulario
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title || !imageUrl) return;
+    if (!title) {
+      alert('Por favor ingresa un título');
+      return;
+    }
+    if (!imageUrl && !selectedFile) {
+      alert('Por favor selecciona una imagen');
+      return;
+    }
 
-    onSave({
-      title,
-      type,
-      category: category || undefined,
-      url: imageUrl,
-    });
+    setIsUploading(true);
+    try {
+      const imageData = {
+        title,
+        type,
+        category: category || undefined,
+        url: imageUrl || '',
+      };
+      
+      // Enviar el archivo si existe
+      onSave(imageData, selectedFile || undefined);
+    } catch (error) {
+      console.error('Error al guardar:', error);
+      alert('Error al guardar la imagen');
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Título */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Título de la imagen
+          Título de la imagen *
         </label>
         <input
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500"
-          placeholder="Ej: Foto de perfil"
+          className="dashboard-input"
+          placeholder="Ej: Mustang GT 69"
           required
+          disabled={isUploading}
         />
       </div>
 
+      {/* Tipo */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Tipo de imagen
+          Tipo de imagen *
         </label>
-        <div className="flex gap-4">
-          <label className="flex items-center gap-2">
+        <div style={{ display: 'flex', gap: '1rem' }}>
+          <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <input
               type="radio"
               value="custom"
               checked={type === 'custom'}
               onChange={() => setType('custom')}
-              className="text-indigo-600"
+              disabled={isUploading}
             />
             <span>📸 Custom</span>
           </label>
-          <label className="flex items-center gap-2">
+          <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <input
               type="radio"
               value="event"
               checked={type === 'event'}
               onChange={() => setType('event')}
-              className="text-indigo-600"
+              disabled={isUploading}
             />
             <span>🎉 Evento</span>
           </label>
         </div>
       </div>
 
+      {/* Categoría */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
           Categoría (opcional)
@@ -96,25 +125,36 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
           type="text"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500"
-          placeholder="Ej: Naturaleza, Deportes, etc."
+          className="dashboard-input"
+          placeholder="Ej: Autos clásicos, Deportes, etc."
+          disabled={isUploading}
         />
       </div>
 
+      {/* Subida de imagen */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Imagen
+          Imagen *
         </label>
         <div
-          className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-indigo-500 transition-colors cursor-pointer"
+          className="dashboard-upload-zone"
           onClick={() => fileInputRef.current?.click()}
+          style={{ 
+            cursor: isUploading ? 'not-allowed' : 'pointer',
+            opacity: isUploading ? 0.6 : 1
+          }}
         >
           {preview ? (
-            <div className="relative">
+            <div style={{ position: 'relative' }}>
               <img
                 src={preview}
                 alt="Preview"
-                className="max-h-48 mx-auto rounded-lg"
+                style={{ 
+                  maxHeight: '200px', 
+                  margin: '0 auto', 
+                  borderRadius: '8px',
+                  border: '4px solid #1a1a1a'
+                }}
               />
               <button
                 type="button"
@@ -122,19 +162,42 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                   e.stopPropagation();
                   setPreview('');
                   setImageUrl('');
+                  setSelectedFile(null);
+                  if (fileInputRef.current) {
+                    fileInputRef.current.value = '';
+                  }
                 }}
-                className="absolute top-2 right-2 p-1 bg-red-600 text-white rounded-full hover:bg-red-700"
+                style={{
+                  position: 'absolute',
+                  top: '8px',
+                  right: '8px',
+                  padding: '8px',
+                  background: '#ff6b6b',
+                  border: '3px solid #1a1a1a',
+                  borderRadius: '50%',
+                  color: 'white',
+                  cursor: 'pointer',
+                  fontWeight: 'bold',
+                  width: '36px',
+                  height: '36px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+                disabled={isUploading}
               >
-                <X size={16} />
+                ✕
               </button>
             </div>
           ) : (
             <div>
-              <Upload className="mx-auto h-12 w-12 text-gray-400" />
-              <p className="mt-2 text-sm text-gray-600">
-                Haz clic o arrastra una imagen aquí
+              <Upload size={48} style={{ margin: '0 auto', color: '#4a5568' }} />
+              <p style={{ marginTop: '8px', color: '#4a5568' }}>
+                {isUploading ? 'Subiendo...' : 'Haz clic o arrastra una imagen aquí'}
               </p>
-              <p className="text-xs text-gray-500">PNG, JPG, GIF hasta 5MB</p>
+              <p style={{ fontSize: '0.8rem', color: '#a0aec0' }}>
+                PNG, JPG, GIF hasta 5MB
+              </p>
             </div>
           )}
           <input
@@ -142,24 +205,33 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
             type="file"
             accept="image/*"
             onChange={handleFileChange}
-            className="hidden"
+            style={{ display: 'none' }}
+            disabled={isUploading}
           />
         </div>
+        {selectedFile && (
+          <p style={{ marginTop: '0.5rem', fontSize: '0.8rem', color: '#4a5568' }}>
+            📎 {selectedFile.name} ({(selectedFile.size / 1024 / 1024).toFixed(2)} MB)
+          </p>
+        )}
       </div>
 
-      <div className="flex justify-end gap-3 pt-4">
+      {/* Botones */}
+      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', paddingTop: '1rem', borderTop: '3px solid #e2e8f0' }}>
         <button
           type="button"
           onClick={onCancel}
-          className="px-4 py-2 border rounded-lg hover:bg-gray-50"
+          className="btn-secondary"
+          disabled={isUploading}
         >
           Cancelar
         </button>
         <button
           type="submit"
-          className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
+          className="btn-primary"
+          disabled={isUploading}
         >
-          {initialData ? 'Actualizar' : 'Guardar'}
+          {isUploading ? '⏳ Guardando...' : initialData ? '💾 Actualizar' : '💾 Guardar'}
         </button>
       </div>
     </form>
